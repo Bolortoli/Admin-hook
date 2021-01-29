@@ -1,9 +1,6 @@
 import React, { useEffect } from "react"
 import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { Link, withRouter } from "react-router-dom"
-import { Card, CardBody, Col, Container, Row } from "reactstrap"
-import { map } from "lodash"
+import { Col, Container, Row } from "reactstrap"
 
 //Import Breadcrumb
 import Breadcrumbs from "components/Common/Breadcrumb"
@@ -13,7 +10,7 @@ import CardContact from "./card-contact"
 
 import { getUsers } from "../../store/contacts/actions"
 
-const ContactsGrid = props => {
+const RoomList = props => {
   const { users, onGetUsers } = props
 
   useEffect(() => {
@@ -34,16 +31,6 @@ const ContactsGrid = props => {
           </Row>
 
           <Row>
-            <Col xs="4">
-              <Card>
-                <CardBody>
-                  
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-
-          <Row>
             <Col xs="12">
               <div className="text-center my-3">
                 <Link to="#" className="text-success">
@@ -59,20 +46,5 @@ const ContactsGrid = props => {
   )
 }
 
-ContactsGrid.propTypes = {
-  users: PropTypes.array,
-  onGetUsers: PropTypes.func,
-}
 
-const mapStateToProps = ({ contacts }) => ({
-  users: contacts.users,
-})
-
-const mapDispatchToProps = dispatch => ({
-  onGetUsers: () => dispatch(getUsers()),
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(ContactsGrid))
+export default RoomList

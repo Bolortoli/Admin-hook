@@ -21,7 +21,8 @@ import {
 //Import Breadcrumb
 import Breadcrumbs from "components/Common/Breadcrumb"
 
-//Import mini card widgets
+import SweetAlert from "react-bootstrap-sweetalert"
+import MaterialTable from 'material-table'
 
 //Import Images
 import profile1 from "assets/images/profile-img.png"
@@ -530,17 +531,37 @@ const UserProfile = props => {
     columns: columns,
     rows: data
   });
+
+
+  const p = [
+    {total: "400000", name: "Bolortoli", account: "3598798741", date: "2020-12-35 12:40:21", transactionID: "#0-31rg"},
+    {total: "4000", name: "Bolortoli", account: "3598798741", date: "2020-12-35 12:40:21", transactionID: "50-31rg"},
+    {total: "4000", name: "Bolortoli", account: "3598798741", date: "2020-12-35 12:40:21", transactionID: "#50-3rg"},
+    {total: "000", name: "Bol", account: "359", date: "2020-12-35 12:40:21", transactionID: "#50-1rg"}
+  ]
+  const [pendingRequests, setPendingRequests] = React.useState(p)
+
   
   const [checkbox1, setCheckbox1] = React.useState('');
 
+  const [pendingRequestDivHover, setPendingRequestDivHover] = React.useState({requestID: "asd", hovered: false})
+
   const [allowButtonActive, setAllowButtonActive] = React.useState(false)
+
+  const [confirm_alert, setconfirm_alert] = useState(false)
+
+
+  const [success_dlg, setsuccess_dlg] = useState(false)
+  const [dynamic_title, setdynamic_title] = useState("")
+  const [dynamic_description, setdynamic_description] = useState("")
+
 
   const showLogs2 = (e) => {
     setCheckbox1(e);
   };
 
-  const toggleAllowButtonActive = () => {
-    
+  const removeRequest = (obj) => {
+    pendingRequests.splice(pendingRequests.indexOf(obj),1)
   }
 
   useEffect(() => {
@@ -549,6 +570,22 @@ const UserProfile = props => {
   
   return (
     <React.Fragment>
+
+      {success_dlg ? (
+        <SweetAlert
+          success
+          title={dynamic_title}
+          onConfirm={() => {
+            setsuccess_dlg(false)
+          }}
+        >
+          {dynamic_description}
+        </SweetAlert>
+      ) : null}
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      />
       <div className="page-content">
         <Container fluid>
           {/* Render Breadcrumbs */}
@@ -630,9 +667,9 @@ const UserProfile = props => {
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">Хувийн дэлгэрэнгүй</CardTitle>
-                  <p className="text-muted mb-4">
+                  {/* <p className="text-muted mb-4">
                     {userProfile.personalDetail}
-                  </p>
+                  </p> */}
                   <div className="table-responsive">
                     <Table className="table-nowrap mb-0">
                       <tbody>
@@ -650,6 +687,14 @@ const UserProfile = props => {
                         </tr>
                         <tr>
                           <th scope="row">Үлдэгдэл : ₮400 000</th>
+                          <td>{userProfile.location}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Сэйф : ₮400 000</th>
+                          <td>{userProfile.location}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Элссэн огноо: 2021-1-28</th>
                           <td>{userProfile.location}</td>
                         </tr>
                       </tbody>
@@ -730,63 +775,89 @@ const UserProfile = props => {
                 <Col className="col-12">
                   <Card>
                     <CardBody>
-                      <CardTitle>Хүлээгдэж буй хүсэлтүүд </CardTitle>
-                      <CardSubtitle className="mb-3">
-                      </CardSubtitle>
-
-                      <MDBDataTableV5
-                        hover
-                        entriesOptions={[7, 20, 25]}
-                        entries={7}
-                        pagesAmount={4}
-                        data={datatable}
-                        checkbox
-                        headCheckboxID='id2'
-                        bodyCheckboxID='checkboxes2'
-                        getValueCheckBox={(e) => {
-                          showLogs2(e);
-                          toggleAllowButtonActive()
-                        }}
-                      />           
-                      <div className="d-flex flex-row-reverse">
-                        <button
-                          type="button"
-                          className="btn btn-success waves-effect btn-label waves-light"
-                          disabled=""
-                        >
-                          <i className="bx bx-check-double label-icon"></i>{" "}
-                          Зөвшөөрөх 
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-danger waves-effect btn-label waves-light"
-                            onClick={() => setAllowButtonActive(!allowButtonActive)}
-                          >
-                            <i className="bx bx-block label-icon "></i> Татгалзах
-                          </button>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col className="col-12">
-                  <Card>
-                    <CardBody>
-                      {checkbox1 && <p>{JSON.stringify(delete checkbox1.checkbox && checkbox1)}</p>}
+                      <CardTitle>Хүлээгдэж буй хүсэлтүүд</CardTitle>
                       
+
+                      {pendingRequests.length == 0 ? (
+                        <span>Хүлээгдэж буй хүсэлт байхгүй</span>
+                      ): (
+                      <div>{pendingRequests.map( (request) => (
+                        <Col xs="12" onMouseLeave={() => setPendingRequestDivHover({requestID: "", hovered: false})} onMouseEnter={() => setPendingRequestDivHover({requestID: request.transactionID, hovered: true})}>
+                          {pendingRequestDivHover.hovered && pendingRequestDivHover.requestID == request.transactionID ? (
+                            <Row>
+                              <Col xs="6">
+                              <span>Дасны дугаар: {request.account}</span>
+                              </Col>
+                              <Col xs="4" className="mb-2">
+                                <Row>
+                                  {/* <Col xs="6" className="p-3"> */}
+                                    <Button
+                                      color="success"
+                                      onClick={() => {
+                                        setconfirm_alert(true)
+                                      }}
+                                      id="sa-success"
+                                    >
+                                      Зөвшөөрөх
+                                    </Button>
+                                  {/* </Col>
+                                  <Col xs="6" className="p-3"> */}
+                                      <Button
+                                        color="danger"
+                                        onClick={() => {
+                                          setconfirm_alert(true)
+                                        }}
+                                        id="sa-danger"
+                                      >
+                                        Татгалзах
+                                      </Button>
+                                  {/* </Col> */}
+                                </Row>
+                                {/* </div> */}
+                                {confirm_alert ? (
+                                  <SweetAlert
+                                    title="Are you sure?"
+                                    warning
+                                    showCancel
+                                    confirmButtonText="Yes, delete it!"
+                                    confirmBtnBsStyle="success"
+                                    cancelBtnBsStyle="danger"
+                                    onConfirm={() => {
+                                      setconfirm_alert(false)
+                                      setsuccess_dlg(true)
+                                      setdynamic_title("Deleted")
+                                      setdynamic_description("Your file has been deleted.")
+                                      setPendingRequestDivHover({requestID: "", hovered: false})
+                                      removeRequest(request)
+                                    }}
+                                    onCancel={() => {
+                                      setconfirm_alert(false)
+                                      removeRequest(request)
+                                      setPendingRequestDivHover({requestID: "", hovered: false})
+                                    }}
+                                  >
+                                    Та энэ үйлдлийг засах боломжгүй
+                                  </SweetAlert>
+                                ) : null}
+                                
+                              </Col>
+                            </Row>
+                            )
+                            : (
+                            <span>{request.transactionID} {request.name} {request.date} {request.total}</span>
+                            
+                          )}
+                        </Col>
+                        )
+
+                        )}
+                      </div>
+                      )}
                     </CardBody>
                   </Card>
                 </Col>
-              </Row>
-
-
-            </Col>
-
-            <Col xl="12">
-              <Row>
-                <Col className="col-12">
+               
+                <Col md="12">
                   <Card>
                     <CardBody>
                       <CardTitle>Нийт гүйлгээ </CardTitle>
@@ -797,6 +868,11 @@ const UserProfile = props => {
                   </Card>
                 </Col>
               </Row>
+
+            </Col>
+
+            <Col xl="12">
+              
             </Col>
 
           </Row>
@@ -823,3 +899,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(UserProfile))
+ 

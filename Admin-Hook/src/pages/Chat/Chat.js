@@ -140,7 +140,7 @@ const Chat = props => {
       <div className="page-content">
         <Container fluid>
           {/* Render Breadcrumb */}
-          <Breadcrumbs title="Skote" breadcrumbItem="Chat" />
+		<h3 className='mb-4'>Чат</h3>
 
           <Row>
             <Col lg="12">
@@ -165,31 +165,10 @@ const Chat = props => {
                             Active
                           </p>
                         </Media>
-
-                        <div>
-                          <Dropdown
-                            isOpen={notification_Menu}
-                            toggle={toggleNotification}
-                            className="chat-noti-dropdown active"
-                          >
-                            <DropdownToggle className="btn" tag="i">
-                              <i className="bx bx-bell bx-tada" />
-                            </DropdownToggle>
-                            <DropdownMenu right>
-                              <DropdownItem href="#">Action</DropdownItem>
-                              <DropdownItem href="#">
-                                Another action
-                              </DropdownItem>
-                              <DropdownItem href="#">
-                                Something else here
-                              </DropdownItem>
-                            </DropdownMenu>
-                          </Dropdown>
-                        </div>
                       </Media>
                     </div>
 
-                    <div className="search-box chat-search-box py-4">
+                    <div className="search-box chat-search-box pt-3">
                       <div className="position-relative">
                         <Input
                           type="text"
@@ -201,51 +180,9 @@ const Chat = props => {
                     </div>
 
                     <div className="chat-leftsidebar-nav">
-                      <Nav pills justified>
-                        <NavItem>
-                          <NavLink
-                            className={classnames({
-                              active: activeTab === "1",
-                            })}
-                            onClick={() => {
-                              toggleTab("1")
-                            }}
-                          >
-                            <i className="bx bx-chat font-size-20 d-sm-none" />
-                            <span className="d-none d-sm-block">Chat</span>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink
-                            className={classnames({
-                              active: activeTab === "2",
-                            })}
-                            onClick={() => {
-                              toggleTab("2")
-                            }}
-                          >
-                            <i className="bx bx-group font-size-20 d-sm-none" />
-                            <span className="d-none d-sm-block">Group</span>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink
-                            className={classnames({
-                              active: activeTab === "3",
-                            })}
-                            onClick={() => {
-                              toggleTab("3")
-                            }}
-                          >
-                            <i className="bx bx-book-content font-size-20 d-sm-none" />
-                            <span className="d-none d-sm-block">Contacts</span>
-                          </NavLink>
-                        </NavItem>
-                      </Nav>
                       <TabContent activeTab={activeTab} className="py-4">
                         <TabPane tabId="1">
                           <div>
-                            <h5 className="font-size-14 mb-3">Recent</h5>
                             <ul className="list-unstyled chat-list">
                               <PerfectScrollbar style={{ height: "410px" }}>
                                 {map(chats, chat => (
@@ -471,25 +408,6 @@ const Chat = props => {
                                 </DropdownMenu>
                               </Dropdown>
                             </li>
-                            <li className="list-inline-item">
-                              <Dropdown
-                                isOpen={other_Menu}
-                                toggle={toggleOther}
-                              >
-                                <DropdownToggle className="btn nav-btn" tag="i">
-                                  <i className="bx bx-dots-horizontal-rounded" />
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                  <DropdownItem href="#">Action</DropdownItem>
-                                  <DropdownItem href="#">
-                                    Another Action
-                                  </DropdownItem>
-                                  <DropdownItem href="#">
-                                    Something else
-                                  </DropdownItem>
-                                </DropdownMenu>
-                              </Dropdown>
-                            </li>
                           </ul>
                         </Col>
                       </Row>
@@ -572,50 +490,6 @@ const Chat = props => {
                                 placeholder="Enter Message..."
                               />
                               <div className="chat-input-links">
-                                <ul className="list-inline mb-0">
-                                  <li className="list-inline-item">
-                                    <Link to="#">
-                                      <i
-                                        className="mdi mdi-emoticon-happy-outline"
-                                        id="Emojitooltip"
-                                      />
-                                      <UncontrolledTooltip
-                                        placement="top"
-                                        target="Emojitooltip"
-                                      >
-                                        Emojis
-                                      </UncontrolledTooltip>
-                                    </Link>
-                                  </li>
-                                  <li className="list-inline-item">
-                                    <Link to="#">
-                                      <i
-                                        className="mdi mdi-file-image-outline"
-                                        id="Imagetooltip"
-                                      />
-                                      <UncontrolledTooltip
-                                        placement="top"
-                                        target="Imagetooltip"
-                                      >
-                                        Images
-                                      </UncontrolledTooltip>
-                                    </Link>
-                                  </li>
-                                  <li className="list-inline-item">
-                                    <Link to="#">
-                                      <i
-                                        className="mdi mdi-file-document-outline"
-                                        id="Filetooltip"
-                                      />
-                                      <UncontrolledTooltip
-                                        placement="top"
-                                        target="Filetooltip"
-                                      >
-                                        Add Files
-                                      </UncontrolledTooltip>
-                                    </Link>
-                                  </li>
-                                </ul>
                               </div>
                             </div>
                           </Col>
@@ -629,7 +503,7 @@ const Chat = props => {
                               className="btn-rounded chat-send w-md waves-effect waves-light"
                             >
                               <span className="d-none d-sm-inline-block mr-2">
-                                Send
+                                Илгээх
                               </span>{" "}
                               <i className="mdi mdi-send" />
                             </Button>

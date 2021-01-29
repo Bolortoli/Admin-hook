@@ -103,10 +103,39 @@ const SidebarContent = props => {
 
             <li>
               <Link to="/user-profile" className=" waves-effect">
-                <i className="bx bxs-user-detail"></i>
+                <i className="bx bxs-user"></i>
                 <span>{props.t("User profile")}</span>
               </Link>
             </li>
+
+            <li>
+              <Link to="/chat" className=" waves-effect">
+                <i className="bx bxs-chat"></i>
+                <span>{props.t("Chat")}</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/deposit-withdraw" className=" waves-effect">
+                <i className="bx bxs-receipt"></i>
+                <span>{props.t("Deposit Withdraw")}</span>
+              </Link>
+            </li>
+            
+            <li>
+              <Link to="/contacts-list" className=" waves-effect">
+                <i className="bx bxs-user-detail"></i>
+                <span>{props.t("Contacts List")}</span>
+              </Link>
+            </li>
+            
+            <li>
+              <Link to="/Dashboard" className=" waves-effect">
+                <i className="bx bxs-user-detail"></i>
+                <span>{props.t("Dashboard")}</span>
+              </Link>
+            </li>
+                        
             
             <li className="menu-title">{props.t("Menu")} </li>
             <li>

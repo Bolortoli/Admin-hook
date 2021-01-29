@@ -24,7 +24,7 @@ import { initFirebaseBackend } from "./helpers/firebase_helper"
 import fakeBackend from "./helpers/AuthType/fakeBackend"
 
 // Activating fake backend
-// fakeBackend()
+fakeBackend()
 
 // const firebaseConfig = {
 //   apiKey: process.env.REACT_APP_APIKEY,
@@ -76,7 +76,7 @@ const App = props => {
               layout={Layout}
               component={route.component}
               key={idx}
-              isAuthProtected={true}
+              isAuthProtected={false}
               exact
             />
           ))}

@@ -8,41 +8,66 @@ import ApexRadial from "./ApexRadial"
 const MonthlyEarning = () => {
   return (
     <React.Fragment>
-      {" "}
-      <Card>
-        <CardBody>
-          <CardTitle className="mb-4">Monthly Earning</CardTitle>
-          <Row>
+          <Row >
+
+           
+
             <Col sm="6">
-              <p className="text-muted">This month</p>
-              <h3>$34,252</h3>
-              <p className="text-muted">
-                <span className="text-success mr-2">
-                  {" "}
-                  12% <i className="mdi mdi-arrow-up"></i>{" "}
-                </span>{" "}
-                From previous period
-              </p>
-              <div className="mt-4">
-                <Link
-                  to=""
-                  className="btn btn-primary waves-effect waves-light btn-sm"
-                >
-                  View More <i className="mdi mdi-arrow-right ml-1"></i>
-                </Link>
-              </div>
+            <Card>
+              <CardBody className='pt-0 pb-0'>
+              <Col sm="6" className='mt-4'>
+                <p className="text-muted">Энэ сар нэмэгдсэн орлого</p>
+                <h3>100000</h3>
+                <p className="text-muted">
+            Өмнөх үзүүлэлтээс
+                  <span className="text-success mr-2">
+                    {" "}
+                    12% <i className="mdi mdi-arrow-up"></i>{" "}
+                  </span>{" "}
+                </p>
+                <div className="mt-4">
+                </div>
+              </Col>
+              <Col sm="6">
+                <div className="mt-4 mt-sm-0">
+                  <ApexRadial />
+                </div>
+              </Col>
+
+            </CardBody>
+            </Card>
             </Col>
+          {/* </Row>
+
+          <Row > */}
             <Col sm="6">
-              <div className="mt-4 mt-sm-0">
-                <ApexRadial />
-              </div>
+
+            <Card>
+              <CardBody className='pt-0 pb-0'>
+                <Col sm="6" className='mt-4'>
+                  <p className="text-muted">Энэ сар нэмэгдсэн тоглогчид</p>
+                  <h3>1000</h3>
+                  <p className="text-muted">
+              Өмнөх үзүүлэлтээс
+                    <span className="text-success mr-2">
+                      {" "}
+                      12% <i className="mdi mdi-arrow-up"></i>{" "}
+                    </span>{" "}
+                  </p>
+                  <div className="mt-4">
+                  </div>
+                </Col>
+                <Col sm="6">
+                  <div className="mt-4 mt-sm-0">
+                    <ApexRadial />
+                  </div>
+                </Col>
+
+              </CardBody>
+            </Card>
             </Col>
+
           </Row>
-          <p className="text-muted mt-4 mb-3">
-            We craft digital, graphic and dimensional thinking.
-          </p>
-        </CardBody>
-      </Card>
     </React.Fragment>
   )
 }

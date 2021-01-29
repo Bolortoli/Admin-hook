@@ -56,7 +56,7 @@ const ContactsList = props => {
       <div className="page-content">
         <Container fluid>
           {/* Render Breadcrumbs */}
-          <Breadcrumbs title="Contacts" breadcrumbItem="Users List" />
+			<h3 className='mb-4'>Тоглогчид</h3>
           <Row>
             <Col lg="12">
               <Card>

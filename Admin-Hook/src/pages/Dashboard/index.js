@@ -14,9 +14,14 @@ import {
   ModalFooter,
   Media,
   Table,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
 } from "reactstrap"
 import { Link } from "react-router-dom"
-
+import DatePicker, {registerLocale, setDefaultLocale} from 'react-datepicker'
+import mn from 'date-fns/locale/'
 //import Charts
 import StackedColumnChart from "./StackedColumnChart"
 
@@ -39,16 +44,24 @@ import { withTranslation } from "react-i18next"
 
 const Dashboard = props => {
   const [modal, setmodal] = useState(false)
+  const [singlebtn, setSinglebtn] = useState(false)
+  const [startDate, setStartDate] = useState(new Date());
+
+  const reports1  = [
+    { title: "Нийт тоглогчид", iconClass: "bx bx-user", description: "1000" },
+    { title: "Онлайн тоглогчид", iconClass: " bx bx-user-check", description: "1000" } 
+  ]
+  const reports2 = [
+    { title: "Нийт орлого", iconClass: "bx bx-downvote", description: "1000000" },
+    { title: "Нийт зарлага", iconClass: "bx bx-upvote", description: "0", },
+  ]
 
   const reports = [
-    { title: "Orders", iconClass: "bx-copy-alt", description: "1,235" },
-    { title: "Revenue", iconClass: "bx-archive-in", description: "$35, 723" },
-    {
-      title: "Average Price",
-      iconClass: "bx-purchase-tag-alt",
-      description: "$16.2",
-    },
-  ]
+    { title: "Нийт орлого", iconClass: "bx bx-downvote", description: "1000000" },
+    { title: "Нийт тоглогчид", iconClass: "bx bx-user", description: "1000" },
+    { title: "Онлайн тоглогчид", iconClass: " bx bx-user-check", description: "1000" }, 
+    { title: "Нийт зарлага", iconClass: "bx bx-upvote", description: "0", },
+  ] 
   const email = [
     { title: "Week", linkto: "#", isActive: false },
     { title: "Month", linkto: "#", isActive: false },
@@ -67,14 +80,10 @@ const Dashboard = props => {
 
           <Row>
             <Col xl="4">
-              <WelcomeComp />
-              <MonthlyEarning />
-            </Col>
-            <Col xl="8">
+              {/* <WelcomeComp /> */}
               <Row>
-                {/* Reports Render */}
-                {reports.map((report, key) => (
-                  <Col md="4" key={"_col_" + key}>
+                {reports1.map((report, key) => (
+                  <Col xl="6" key={"_col_" + key}>
                     <Card className="mini-stats-wid">
                       <CardBody>
                         <Media>
@@ -99,45 +108,136 @@ const Dashboard = props => {
                   </Col>
                 ))}
               </Row>
-
-              <Card>
-                <CardBody>
-                  <CardTitle className="mb-4 float-sm-left">
-                    Email Sent
-                  </CardTitle>
-                  <div className="float-sm-right">
-                    <ul className="nav nav-pills">
-                      {email.map((mail, key) => (
-                        <li className="nav-item" key={"_li_" + key}>
-                          <Link
-                            className={
-                              mail.isActive ? "nav-link active" : "nav-link"
-                            }
-                            to={mail.linkto}
-                          >
-                            {mail.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="clearfix"></div>
-                  <StackedColumnChart />
-                </CardBody>
-              </Card>
+              <Row>
+                {reports2.map((report, key) => (
+                  <Col md="6" key={"_col_" + key}>
+                    <Card className="mini-stats-wid">
+                      <CardBody>
+                        <Media>
+                          <Media body>
+                            <p className="text-muted font-weight-medium">
+                              {report.title}
+                            </p>
+                            <h4 className="mb-0">{report.description}</h4>
+                          </Media>
+                          <div className="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                            <span className="avatar-title">
+                              <i
+                                className={
+                                  "bx " + report.iconClass + " font-size-24"
+                                }
+                              ></i>
+                            </span>
+                          </div>
+                        </Media>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+              <Col md="12">
+                  <Card>
+                    <CardBody>
+                      {/* <div className="float-sm-right">
+                        <ul className="nav nav-pills">
+                          {email.map((mail, key) => (
+                            <li className="nav-item" key={"_li_" + key}>
+                              <Link
+                                className={
+                                  mail.isActive ? "nav-link active" : "nav-link"
+                                }
+                                to={mail.linkto}
+                              >
+                                {mail.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="clearfix"></div> */}
+                       <DatePicker
+                        selected={startDate}
+                        onChange={date => setStartDate(date)}
+                        dateFormat="MM/yyyy"
+                        showMonthYearPicker
+                        showFullMonthYearPicker
+                      />
+                      <StackedColumnChart />
+                    </CardBody>
+                  </Card>
+                </Col>
             </Col>
-          </Row>
-
-          <Row>
-            <Col xl="4">
-              <SocialSource />
-            </Col>
-            <Col xl="4">
-              <ActivityComp />
-            </Col>
-
-            <Col xl="4">
-              <TopCities />
+            <Col xl="8">
+              {/* <Row> */}
+                <Col sm="12">
+                  {/* <Card>
+                    <CardBody> */}
+                      <MonthlyEarning />
+                    {/* </CardBody>
+                  </Card> */}
+                </Col>
+              {/* </Row> */}
+              <Row>
+                {/* <Col md="12"> */}
+                {/* {reports.map((report, key) => (
+                  <Col md="6" key={"_col_" + key}>
+                    <Card className="mini-stats-wid">
+                      <CardBody>
+                        <Media>
+                          <Media body>
+                            <p className="text-muted font-weight-medium">
+                              {report.title}
+                            </p>
+                            <h4 className="mb-0">{report.description}</h4>
+                          </Media>
+                          <div className="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                            <span className="avatar-title">
+                              <i
+                                className={
+                                  "bx " + report.iconClass + " font-size-24"
+                                }
+                              ></i>
+                            </span>
+                          </div>
+                        </Media>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                ))} */}
+                {/* </Col> */}
+                <Col md="12">
+                  <Card>
+                    <CardBody>
+                      {/* <div className="float-sm-right">
+                        <ul className="nav nav-pills">
+                          {email.map((mail, key) => (
+                            <li className="nav-item" key={"_li_" + key}>
+                              <Link
+                                className={
+                                  mail.isActive ? "nav-link active" : "nav-link"
+                                }
+                                to={mail.linkto}
+                              >
+                                {mail.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="clearfix"></div> */}
+                      <DatePicker
+                        selected={startDate}
+                        onChange={date => setStartDate(date)}
+                        dateFormat="MM/yyyy"
+                        showMonthYearPicker
+                        showFullMonthYearPicker
+                      />
+                      <StackedColumnChart />
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+              
             </Col>
           </Row>
 

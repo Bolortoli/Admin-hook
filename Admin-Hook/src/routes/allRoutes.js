@@ -168,7 +168,14 @@ import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile"
 import User_Profile from "../pages/User-profile"
 import RoomConfiguration from "../pages/Room-configuration"
 
+// Dsolutions 
+import DepositWithdraw from "../pages/Deposit-Withdraw/index"
+
+
 const userRoutes = [
+  // Dsolutions
+  { path: "/deposit-withdraw", component: DepositWithdraw },
+
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
   { path: "/dashboard-crypto", component: DashboardCrypto },

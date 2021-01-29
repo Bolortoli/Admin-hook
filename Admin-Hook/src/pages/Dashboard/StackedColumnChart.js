@@ -5,22 +5,18 @@ class StackedColumnChart extends Component {
   render() {
     const series = [
       {
-        name: "Series A",
+        name: "Орлого",
         data: [44, 55, 41, 67, 22, 43, 36, 52, 24, 18, 36, 48]
       },
       {
-        name: "Series B",
-        data: [13, 23, 20, 8, 13, 27, 18, 22, 10, 16, 24, 22]
+        name: "Зарлага",
+        data: [13, 23, 20, 8, 10, 27, 18, 22, 10, 16, 24, 22]
       },
-      {
-        name: "Series C",
-        data: [11, 17, 15, 15, 21, 14, 11, 18, 17, 12, 20, 18]
-      }
     ]
 
     const options = {
       chart: {
-        stacked: !0,
+        stacked: !4,
         toolbar: {
           show: 1
         },
@@ -31,7 +27,7 @@ class StackedColumnChart extends Component {
       plotOptions: {
         bar: {
           horizontal: !1,
-          columnWidth: "15%"
+          columnWidth: "30%"
           // endingShape: "rounded"
         }
       },
@@ -39,7 +35,7 @@ class StackedColumnChart extends Component {
         enabled: !1
       },
       xaxis: {
-        show: true,
+        show: false,
         categories: [
           "Jan",
           "Feb",
@@ -52,11 +48,17 @@ class StackedColumnChart extends Component {
           "Sep",
           "Oct",
           "Nov",
-          "Dec"
+          "Dec",
         ],
         labels: {
-          show: true
-        }
+          show: true,
+          datetimeFormatter: {
+            year: 'yyyy',
+            month: 'MMM',
+            day: 'dd MMM',
+            hour: 'HH:mm'
+          }
+        },
       },
       colors: ["#556ee6", "#f1b44c", "#34c38f"],
       legend: {

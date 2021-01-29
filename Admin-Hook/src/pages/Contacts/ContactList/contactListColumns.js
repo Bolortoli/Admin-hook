@@ -48,24 +48,7 @@ const contactListColumns = () => [
     text: "Email",
     sort: true,
   },
-  {
-    text: "Tags",
-    dataField: "tags",
-    sort: true,
-    formatter: (cellContent, user) => (
-      <>
-        {user.skills.map((skill, key) => (
-          <Link
-            to="#"
-            className="badge badge-soft-primary font-size-11 m-1"
-            key={"_skill_" + key}
-          >
-            {skill.name}
-          </Link>
-        ))}
-      </>
-    ),
-  },
+  
   {
     dataField: "projects",
     text: "Projects",

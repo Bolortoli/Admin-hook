@@ -3,92 +3,17 @@ import { Card, CardBody, CardTitle, Badge, Button } from "reactstrap"
 import { Link } from "react-router-dom"
 import MaterialTable from 'material-table'
 
-const LatestTranaction = () => {
-  const transactions = [
-    {
-      id: "customCheck2",
-      orderId: "#SK2540",
-      billingName: "Neal Matthews",
-      Date: "07 Oct, 2019",
-      total: "$400",
-      badgeClass: "success",
-      paymentStatus: "Paid",
-      methodIcon: "fa-cc-mastercard",
-      paymentMethod: "Mastercard",
-      link: "#",
-    },
-    {
-      id: "customCheck3",
-      orderId: "#SK2541",
-      billingName: "Jamal Burnett",
-      Date: "07 Oct, 2019",
-      total: "$380",
-      badgeClass: "danger",
-      paymentStatus: "Chargeback",
-      methodIcon: "fa-cc-visa",
-      paymentMethod: "Visa",
-      link: "#",
-    },
-    {
-      id: "customCheck4",
-      orderId: "#SK2542",
-      billingName: "Juan Mitchell",
-      Date: "06 Oct, 2019",
-      total: "$384",
-      badgeClass: "success",
-      paymentStatus: "Paid",
-      methodIcon: "fa-cc-paypal",
-      paymentMethod: "Paypal",
-      link: "#",
-    },
-    {
-      id: "customCheck5",
-      orderId: "#SK2543",
-      billingName: "Barry Dick",
-      Date: "05 Oct, 2019",
-      total: "$412",
-      badgeClass: "success",
-      paymentStatus: "Paid",
-      methodIcon: "fa-cc-mastercard",
-      paymentMethod: "Mastercard",
-      link: "#",
-    },
-    {
-      id: "customCheck6",
-      orderId: "#SK2544",
-      billingName: "Ronald Taylor",
-      Date: "04 Oct, 2019",
-      total: "$404",
-      badgeClass: "warning",
-      paymentStatus: "Refund",
-      methodIcon: "fa-cc-visa",
-      paymentMethod: "Visa",
-      link: "#",
-    },
-    {
-      id: "customCheck7",
-      orderId: "#SK2545",
-      billingName: "Jacob Hunter",
-      Date: "04 Oct, 2019",
-      total: "$392",
-      badgeClass: "success",
-      paymentStatus: "Paid",
-      methodIcon: "fa-cc-paypal",
-      paymentMethod: "Paypal",
-      link: "#",
-    },
-  ]
+const LatestDeposit = ({ title, transactions }) => {
 
   return (
     <React.Fragment>
-
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      />
-      <Card>
+      <Card className='mt-5 pt-5 px-4 w-50 mb-5' >
         <CardBody>
-          <CardTitle>Гүйлгээний түүх</CardTitle>
+          <CardTitle className="mb-2">{ title }</CardTitle>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
           <MaterialTable
             title=""
             columns={[
@@ -158,20 +83,7 @@ const LatestTranaction = () => {
               actionsColumnIndex: -1
             }}
           />
-        </CardBody>
-      </Card>
-     
-
-
-
-
-
-
-
-      {/* <Card>
-        <CardBody>
-          <CardTitle className="mb-4">Сүүлд хийгдсэн гүйлгээ</CardTitle>
-          <div className="table-responsive">
+          {/* <div className="table-responsive">
             <table className="table table-centered table-nowrap mb-0">
               <thead className="thead-light">
                 <tr>
@@ -181,8 +93,6 @@ const LatestTranaction = () => {
                   <th>Гүйлгээ утга</th>
                   <th>Огноо</th>
                   <th>Мөнгөн дүн</th>
-                  <th>Гүйлгээ төлөв</th>
-                  <th>Дэлгэрэнгүй</th>
                 </tr>
               </thead>
               <tbody>
@@ -199,36 +109,15 @@ const LatestTranaction = () => {
                     <td>{transaction.billingName}</td>
                     <td>{transaction.Date}</td>
                     <td>{transaction.total}</td>
-                    <td>
-                      <Badge
-                        className={
-                          "font-size-12 badge-soft-" + transaction.badgeClass
-                        }
-                        color={transaction.badgeClass}
-                        pill
-                      >
-                        {transaction.paymentStatus}
-                      </Badge>
-                    </td>
-                    <td>
-                      <Button
-                        type="button"
-                        color="primary"
-                        size="sm"
-                        className="btn-rounded waves-effect waves-light"
-                      >
-                        View Details
-                      </Button>
-                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </div> */}
         </CardBody>
-      </Card> */}
+      </Card>
     </React.Fragment>
   )
 }
 
-export default LatestTranaction
+export default LatestDeposit 
